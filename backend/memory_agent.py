@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
+import os
 
 
 class MemoryAgent:
@@ -17,6 +18,14 @@ class MemoryAgent:
             self.driver = driver
         else:  # pragma: no cover - external dependency
             from neo4j import GraphDatabase  # type: ignore
+
+            uri = uri or os.getenv("NEO4J_URI")
+            user = user or os.getenv("NEO4J_USER")
+            password = password or os.getenv("NEO4J_PASSWORD")
+            if not uri:
+                raise ValueError(
+                    "Neo4j URI must be provided via parameter or NEO4J_URI environment variable"
+                )
 
             self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
