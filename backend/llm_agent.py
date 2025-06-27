@@ -15,7 +15,9 @@ class LLMAgent:
         except Exception as exc:  # pragma: no cover - library not installed
             raise RuntimeError("openai package not available") from exc
 
-        openai.api_key = self.api_key
+        client = openai.OpenAI(api_key=self.api_key)
         messages = [{"role": "user", "content": prompt}]
-        completion = openai.ChatCompletion.create(model=self.model, messages=messages)
-        return completion.choices[0].message["content"].strip()
+        completion = client.chat.completions.create(
+            model=self.model, messages=messages
+        )
+        return completion.choices[0].message.content.strip()
