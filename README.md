@@ -16,7 +16,8 @@ uvicorn backend.api_interface:app --reload
 
 Environment variables `OPENAI_API_KEY` and optionally `NEO4J_URI`, `NEO4J_USER`,
 and `NEO4J_PASSWORD` are required. Copy `\.env.example` to `\.env` and fill in
-your credentials before starting the service.
+your credentials before starting the service. When `MemoryAgent` is created
+without explicit parameters it reads these values from the environment.
 
 ## Frontend
 
