@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+openai
+neo4j
+pydantic
+pytest
+python-dotenv
